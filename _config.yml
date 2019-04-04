@@ -1,0 +1,147 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 百草园
+subtitle: 不积硅步无以至千里，不积小流无以成江海
+description: 生活及编码人生
+author: Lu Xiaoyu
+language: zh-Hans
+timezone: Asia/Shanghai
+
+## URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://blog.luxiaoyu.cn
+root: /
+#permalink: :year/:title-:month-:day/
+permalink: :title/
+# permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace:
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 5
+pagination_dir: page
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+
+## Themes: https://hexo.io/themes/
+theme: next
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+# deploy:
+  # type: ftpsync
+  # host: blog.luxiaoyu.cn
+  # user: luxy
+  # password: lxyboy19900311
+  # remote: /www/blog.luxiaoyu.cn
+  # port: 21
+  # ignore:
+  # connections: 1
+  # verbose: true
+  
+deploy:
+  type: sftp
+  host: blog.luxiaoyu.cn
+  user: ***
+  pass: ***
+  remotePath: /home/luxy/www/blog.luxiaoyu.cn
+  port: ***
+  privateKey: 
+  passphrase: 
+  agent: 
+ 
+ 
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+
+algolia:
+  appId: '***'
+  apiKey: '***'
+  adminApiKey: '*'
+  indexName: 'my-hexo-site'
+  chunkSize: 5000
+  fields:
+    - title
+    - slug
+    - path
+    - content:strip    
+since: 2017
+
+
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: false
+    typographer: false
+  plugins:
+    - markdown-it-footnote
+    - markdown-it-sub
+    - markdown-it-sup
+    - markdown-it-emoji
+    #- markdown-it-toc-and-anchor
+  anchors:
+    level: 2
+    collisionSuffix: 'v'
+    permalink: false
+    permalinkClass: header-anchor
+    permalinkSymbol: 
+    
+#flowchart:
+#  raphael: http://lib.baomitu.com/raphael/2.2.7/raphael.min.js
+#  flowchart: http://lib.baomitu.com/flowchart/1.6.6/flowchart.min.js
+#  options: # options used for `drawSVG`
+
+baidu_analytics: *
+
+# hexo-admin authentification
+admin:
+  username: ***
+  password_hash: *
+  secret: ***
