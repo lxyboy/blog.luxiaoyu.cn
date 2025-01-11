@@ -1,0 +1,1 @@
+TODO: 学习django的SimpleLazyObject实现

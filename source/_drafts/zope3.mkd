@@ -1,0 +1,152 @@
+# Zope3 学习笔记
+
+## Framework框架
+###ZCA
+Zope组建框架用来提供定义注册寻找组建。可以用来创建松耦合的企业应用
+
+###ZTK
+Zope Toolkit. The ZCA is part of it.
+
+###ZPT
+Zope Page Templates
+
+###CMF
+Content Management Framework
+
+###ZCML
+Zope Configuration markup language
+
+###Repoze
+Repoze集成Zope技术通过WSGI
+
+## Databases
+### ZODB
+Zope Object DataBase.
+
+## Application Servers
+### Zope 
+是一个基于Python的应用服务器。
+
+### BlueBream
+formerly known as Zope3
+
+### Grok
+Grok is a web application framework for Python developers
+
+## 工具
+### Buildout
+Buildout is a Python-based build system for creating, assembling and deploying application from multiple pars, some of which may be non-Python-based.
+
+## Zope based Software
+### Plone
+### Pyramid
+### Silva
+### ERP5
+
+
+## Zope3 Book learn
+
+Zope组件体系结构(ZCA)主要有3核心包
+
+1. *zope.interface*
+2. *zope.event*
+3. *zope.component*
+
+*ZCA*他们自己并不是组件，它们只是用于创建，注册，检索组件的。
+记住，适配器(adapter)是一个普通的python类(通常是一个工厂类)，工具箱(utility)是一个普通的python可呼叫(callable)对象。
+
+
+## Zope学习
+
+### 安装Zope3
+
+### Zope Instance的创建
+
+bin/mkzopeinstance -d ~/tmp/testzope/instance2 --user=test:cloudopen --zserver
+
+创建一个目录*~/tmp/testzope/instance2*用来存放instance
+
+### 运行Zope3
+
+进入*~/tmp/testzope/instance2*，运行*bin/runzope*
+
+### 使用ZMI
+
+#### 网页开发一个实例页面
+
+#### 设定一个可访问图片，文件
+
+### 使用ZCA
+
+####目标
+
+创建一个可供ZMI使用的Component
+
+####实现方法
+
+进入```cd ~/tmp/testzope/instance2/lib/python```，原因：在bin/*中的脚本中sys.path均设置了该目录。
+
+创建文件夹和文件```mkdir mymessage; cd mymessage; touch __init__.py```, 对于python2.4.4无*__init__.py*也能正常导入。
+
+编辑文件```vim interfaces.py```
+
+```txt
+# -*- coding:utf-8 -*-
+__author__ = 'luxy'
+
+from zope.interface import Interface
+from zope.schema import Text,TextLine,Field
+from zope.app.container.constraints import ContainerTypesConstraint
+from zope.app.container.constraints import ItemTypePrecondition
+from zope.app.container.interfaces import IContained,IContainer
+from zope.app.file.interfaces import IFile
+
+class IMessage(Interface):
+    title = TextLine(
+            title = u'Title/Subject',
+            description = u'Title and/or subject of the message.',
+            default = u'',
+            required = True)
+
+    body = Text(
+            title = u'Message Body',
+            description = u'This is the actual message. Type whatever you wish.',
+            default = u'',
+            required = False)
+
+
+class IMessageBoard(IContainer):
+    """The Message board is the base object for our package.It can only contain IMessage objects."""
+
+    def __setitem__(name,object):
+            """Add a IMessage object."""
+
+    __setitem__.precondition = ItemTypePrecondition(IMessage)
+
+    description = Text(
+            title = u"Description",
+            description=u"A detailed description of the content of the board.",
+            default = u"",
+            required = False)
+
+class IMessageContained(IContained):
+    """Interface that specifies the type of objects that can contain messages."""
+    __parent__ = Field(
+            constraint = ContainerTypesConstraint(IMessageBoard,IMessage))
+
+class IMessageContainer(IContainer):
+    """We also want to make the message object a container that can contain responses(other messages) and attachments(files and images)."""
+
+```
+
+
+
+
+### Zope目前状态
+
+Zope3现状， zope3官网svn上关于zope3的最后提交时间到目前为止已经过去4年。
+
+
+
+
+
